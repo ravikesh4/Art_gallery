@@ -1,0 +1,27 @@
+<?php
+include('config.php');
+if (!isset($_FILES['art1']['tmp_name'])) {
+	echo "";
+	}else{
+	$file=$_FILES['image']['tmp_name'];
+	$image= addslashes(file_get_contents($_FILES['image']['tmp_name']));
+	$image_name= addslashes($_FILES['image']['name']);
+			
+			move_uploaded_file($_FILES["image"]["tmp_name"],"photos/" . $_FILES["image"]["name"]);
+			
+			$name=$_POST['name'];
+			$dob=$_POST['dob'];
+			$address=$_POST['address'];
+			$artistphoto="photos/" . $_FILES["artistphoto"]["name"];
+			$art1="photos/" . $_FILES["art1"]["name"];
+			$art2="photos/" . $_FILES["art2"]["name"];
+			$art3="photos/" . $_FILES["art3"]["name"];
+			$art4="photos/" . $_FILES["art4"]["name"];
+			$art5="photos/" . $_FILES["art5"]["name"];
+			$art6="photos/" . $_FILES["art6"]["name"];
+			
+			$save=mysql_query("INSERT INTO artist (name, dob, address, artistphoto, art1, art2, art3, art4, art5, art6) VALUES ('$name','$dob','$address','$artistphoto','$art1','$art2','$art3','$art4','$art5','$art6')");
+			header("location: artist.php");
+			exit();					
+	}
+?>
